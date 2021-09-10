@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -28,16 +30,21 @@ public class Fiber implements Serializable {
 	private Instant createdAt;
 	
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-	private Instant updatedAt;	
+	private Instant updatedAt;
+	
+	@ManyToOne
+	@JoinColumn(name = "group_id")
+	private Group group;
 	
 	public Fiber() {
 	}
 
-	public Fiber(Long id, Integer number, Boolean occupation, String label) {
+	public Fiber(Long id, Integer number, Boolean occupation, String label, Group group) {
 		this.id = id;
 		this.number = number;
 		this.occupation = occupation;
 		this.label = label;
+		this.group = group;
 	}
 
 	public Long getId() {
@@ -88,6 +95,14 @@ public class Fiber implements Serializable {
 	@PreUpdate
 	public void PreUpdate() {
 		updatedAt = Instant.now();
+	}
+	
+	public Group getGroup() {
+		return group;
+	}
+
+	public void setGroup(Group group) {
+		this.group = group;
 	}
 
 	@Override
