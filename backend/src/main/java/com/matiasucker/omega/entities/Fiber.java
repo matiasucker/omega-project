@@ -39,12 +39,11 @@ public class Fiber implements Serializable {
 	public Fiber() {
 	}
 
-	public Fiber(Long id, Integer number, Boolean occupation, String label, Group group) {
+	public Fiber(Long id, Integer number, Boolean occupation, String label) {
 		this.id = id;
 		this.number = number;
 		this.occupation = occupation;
 		this.label = label;
-		this.group = group;
 	}
 
 	public Long getId() {
