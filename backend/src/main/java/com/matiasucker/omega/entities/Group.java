@@ -37,17 +37,15 @@ public class Group implements Serializable {
 	@JoinColumn(name = "cable_id")
 	private Cable cable;
 	
-	@OneToMany
-	@JoinColumn(name = "group")
+	@OneToMany(mappedBy = "group")
 	private Set<Fiber> fibers = new HashSet<>();
 	
 	public Group() {
 	}
 
-	public Group(Long id, Integer numGroup, Cable cable) {
+	public Group(Long id, Integer numGroup) {
 		this.id = id;
 		this.numGroup = numGroup;
-		this.cable = cable;
 	}
 
 	public Long getId() {
