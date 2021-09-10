@@ -2,12 +2,16 @@ package com.matiasucker.omega.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -26,14 +30,21 @@ public class Group implements Serializable {
 	private Instant createdAt;
 	
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-	private Instant updatedAt;	
+	private Instant updatedAt;
+	
+	@ManyToOne
+	@JoinColumn(name = "cable_id")
+	private Cable cable;
+	
+	private Set<Fiber> fibers = new HashSet<>();
 	
 	public Group() {
 	}
 
-	public Group(Long id, Integer numGroup) {
+	public Group(Long id, Integer numGroup, Cable cable) {
 		this.id = id;
 		this.numGroup = numGroup;
+		this.cable = cable;
 	}
 
 	public Long getId() {
@@ -68,6 +79,22 @@ public class Group implements Serializable {
 	@PreUpdate
 	public void PreUpdate() {
 		updatedAt = Instant.now();
+	}
+	
+	public Cable getCable() {
+		return cable;
+	}
+
+	public void setCable(Cable cable) {
+		this.cable = cable;
+	}
+	
+	public Set<Fiber> getFibers() {
+		return fibers;
+	}
+
+	public void setFibers(Set<Fiber> fibers) {
+		this.fibers = fibers;
 	}
 
 	@Override
