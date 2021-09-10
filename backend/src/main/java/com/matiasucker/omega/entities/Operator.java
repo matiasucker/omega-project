@@ -13,7 +13,7 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb-operator")
+@Table(name = "tb_operator")
 public class Operator implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
