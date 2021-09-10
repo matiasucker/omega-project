@@ -32,7 +32,6 @@ public class Group implements Serializable {
 	}
 
 	public Group(Long id, Integer numGroup) {
-		super();
 		this.id = id;
 		this.numGroup = numGroup;
 	}

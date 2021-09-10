@@ -33,7 +33,6 @@ public class Manufacter implements Serializable {
 	}
 
 	public Manufacter(Long id, String corporateName, String cnpj) {
-		super();
 		this.id = id;
 		this.corporateName = corporateName;
 		this.cnpj = cnpj;
