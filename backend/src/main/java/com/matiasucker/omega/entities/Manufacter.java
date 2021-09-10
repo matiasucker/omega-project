@@ -22,6 +22,7 @@ public class Manufacter implements Serializable {
 	private Long id;
 	private String corporateName;
 	private String cnpj;
+	private String phone;
 	
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant createdAt;
@@ -32,10 +33,11 @@ public class Manufacter implements Serializable {
 	public Manufacter() {
 	}
 
-	public Manufacter(Long id, String corporateName, String cnpj) {
+	public Manufacter(Long id, String corporateName, String cnpj, String phone) {
 		this.id = id;
 		this.corporateName = corporateName;
 		this.cnpj = cnpj;
+		this.phone = phone;
 	}
 
 	public Long getId() {
@@ -61,6 +63,14 @@ public class Manufacter implements Serializable {
 	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
 	}
+	
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 
 	public Instant getCreatedAt() {
 		return createdAt;
@@ -78,6 +88,31 @@ public class Manufacter implements Serializable {
 	@PreUpdate
 	public void PreUpdate() {
 		updatedAt = Instant.now();
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Manufacter other = (Manufacter) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
 	}
 	
 }
