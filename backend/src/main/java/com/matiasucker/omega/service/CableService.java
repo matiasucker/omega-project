@@ -21,7 +21,7 @@ public class CableService {
 	public CableDTO findById(Long id) {
 		Optional<Cable> obj = repository.findById(id);
 		Cable entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
-		return new CableDTO(entity);
+		return new CableDTO(entity, entity.getGroups());
 	}
 
 }
