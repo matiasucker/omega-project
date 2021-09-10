@@ -1,8 +1,11 @@
 package com.matiasucker.omega.dto;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.matiasucker.omega.entities.Cable;
+import com.matiasucker.omega.entities.Group;
 
 public class CableDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -14,12 +17,13 @@ public class CableDTO implements Serializable {
 	private Integer amountFiber;
 	private Integer amountGroup;
 	
+	private Set<GroupDTO> groups = new HashSet<>();
+	
 	public CableDTO() {
 	}
 
 	public CableDTO(Long id, Integer number, String code, String description, Integer amountFiber,
 			Integer amountGroup) {
-		super();
 		this.id = id;
 		this.number = number;
 		this.code = code;
@@ -35,6 +39,11 @@ public class CableDTO implements Serializable {
 		this.description = entity.getDescription();
 		this.amountFiber = entity.getAmountFiber();
 		this.amountGroup = entity.getAmountGroup();
+	}
+	
+	public CableDTO(Cable entity, Set<Group> groups) {
+		this(entity);
+		groups.forEach(gro -> this.groups.add(new GroupDTO(gro)));
 	}
 
 	public Long getId() {
@@ -83,6 +92,14 @@ public class CableDTO implements Serializable {
 
 	public void setAmountGroup(Integer amountGroup) {
 		this.amountGroup = amountGroup;
+	}
+
+	public Set<GroupDTO> getGroups() {
+		return groups;
+	}
+
+	public void setGroups(Set<GroupDTO> groups) {
+		this.groups = groups;
 	}
 	
 }
