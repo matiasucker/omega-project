@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -36,6 +37,8 @@ public class Group implements Serializable {
 	@JoinColumn(name = "cable_id")
 	private Cable cable;
 	
+	@OneToMany
+	@JoinColumn(name = "group")
 	private Set<Fiber> fibers = new HashSet<>();
 	
 	public Group() {
