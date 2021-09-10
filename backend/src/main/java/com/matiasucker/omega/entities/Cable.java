@@ -2,15 +2,20 @@ package com.matiasucker.omega.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_cable")
@@ -31,6 +36,10 @@ public class Cable implements Serializable {
 	
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant updatedAt;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "cable")
+	private Set<Group> groups = new HashSet<>();
 	
 	public Cable() {
 	}
@@ -108,6 +117,14 @@ public class Cable implements Serializable {
 	@PreUpdate
 	public void PreUpdate() {
 		updatedAt = Instant.now();
+	}
+	
+	public Set<Group> getGroups() {
+		return groups;
+	}
+
+	public void setGroups(Set<Group> groups) {
+		this.groups = groups;
 	}
 
 	@Override
