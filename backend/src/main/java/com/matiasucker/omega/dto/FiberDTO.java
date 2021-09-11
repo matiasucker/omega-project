@@ -13,12 +13,12 @@ public class FiberDTO implements Serializable {
 	private Boolean occupation;
 	private String label;
 	
-	private Group group;
+	private GroupDTO group;
 	
 	public FiberDTO() {
 	}
 
-	public FiberDTO(Long id, Integer number, Boolean occupation, String label, Group group) {
+	public FiberDTO(Long id, Integer number, Boolean occupation, String label, GroupDTO group) {
 		this.id = id;
 		this.number = number;
 		this.occupation = occupation;
@@ -31,7 +31,12 @@ public class FiberDTO implements Serializable {
 		this.number = entity.getNumber();
 		this.occupation = entity.getOccupation();
 		this.label = entity.getLabel();
-		this.group = entity.getGroup();
+		this.group = new GroupDTO(entity.getGroup());
+	}
+	
+	public FiberDTO(Fiber entity, Group group) {
+		this(entity);
+		this.group = new GroupDTO(group);
 	}
 
 	public Long getId() {
@@ -66,11 +71,11 @@ public class FiberDTO implements Serializable {
 		this.label = label;
 	}
 
-	public Group getGroup() {
+	public GroupDTO getGroup() {
 		return group;
 	}
 
-	public void setGroup(Group group) {
+	public void setGroup(GroupDTO group) {
 		this.group = group;
 	}
 	
