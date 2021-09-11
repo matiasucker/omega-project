@@ -7,19 +7,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.matiasucker.omega.dto.GroupDTO;
-import com.matiasucker.omega.service.GroupService;
+import com.matiasucker.omega.dto.FiberDTO;
+import com.matiasucker.omega.service.FiberService;
 
 @RestController
-@RequestMapping(value = "/groups")
+@RequestMapping(value = "/fibers")
 public class GroupResource {
 	
 	@Autowired
-	private GroupService service;
+	private FiberService service;
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<GroupDTO> findById(@PathVariable Long id) {
-		GroupDTO dto = service.findById(id);
+	public ResponseEntity<FiberDTO> findById(@PathVariable Long id) {
+		FiberDTO dto = service.findById(id);
 		return ResponseEntity.ok().body(dto);
 	}
 
