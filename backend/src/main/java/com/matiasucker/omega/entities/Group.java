@@ -17,6 +17,8 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tb_group")
 public class Group implements Serializable {
@@ -33,6 +35,7 @@ public class Group implements Serializable {
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant updatedAt;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "cable_id")
 	private Cable cable;
